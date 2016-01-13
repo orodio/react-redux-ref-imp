@@ -1,6 +1,6 @@
-import { store }    from "../store"
+import { dispatch } from "../store"
 import { generate } from "bc-uuid"
-import { POST }     from "../__lib__/http"
+import { POST$ }    from "../__lib__/http"
 
 export var type = "COUNTER_CREATE"
 
@@ -15,11 +15,9 @@ export var shape = {
 
 export var intent = title => {
   var counter = newCounter({ title })
-  POST("/api/v1/counters", counter)
-    .then(res => store.dispatch({
-      type,
-      counter,
-    }))
+  POST$("/api/v1/counters", counter).
+    map(() => ({ type, counter })).
+    forEach(dispatch)
 }
 
 export var reducer = (state, { counter }) => ({

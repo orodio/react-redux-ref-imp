@@ -21,3 +21,4 @@ var reducer = createReducer(
 )
 
 export var store = createStore(reducer)
+export var dispatch = store.dispatch.bind(store)

@@ -1,5 +1,5 @@
-import { store } from "../store"
-import { DELETE } from "../__lib__/http"
+import { dispatch } from "../store"
+import { DELETE$ }  from "../__lib__/http"
 
 export var type = "COUNTER_DELETE"
 
@@ -9,11 +9,9 @@ export var shape = {
 }
 
 export var intent = id =>
-  DELETE("/api/v1/counters", { id })
-    .then(res => store.dispatch({
-      type,
-      id,
-    }))
+  DELETE$("/api/v1/counters", { id }).
+    map(() => ({ type, id })).
+    forEach(dispatch)
 
 export var reducer = (state, { id }) => ({
   ...state,

@@ -1,5 +1,5 @@
-import { store } from "../store"
-import { POST }  from "../__lib__/http"
+import { dispatch } from "../store"
+import { POST$ }    from "../__lib__/http"
 
 const DEC_AMOUNT = 1
 
@@ -11,11 +11,9 @@ export var shape = {
 }
 
 export var intent = id =>
-  POST("/api/v1/counter/dec", { id })
-    .then(res => store.dispatch({
-      type,
-      id,
-    }))
+  POST$("/api/v1/counter/dec", { id }).
+    map(() => ({ type, id })).
+    forEach(dispatch)
 
 export var reducer = (state, { id }) => ({
   ...state,
