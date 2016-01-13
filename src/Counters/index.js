@@ -14,7 +14,7 @@ export class Counters extends Component {
   }
 
   componentWillUnmount () {
-    this.poll.destroy()
+    this.poll.dispose()
   }
 
   render () {
