@@ -3,14 +3,18 @@ import css                        from "./styles.css"
 import { connect }                from "react-redux"
 import { Counter }                from "../Counter"
 import { NewCounterForm as Form } from "../NewCounterForm"
-import { intent as pollCounters } from "../__aggregates__/counters_server"
+import { intent as pollCounters } from "../__aggregates__/counters_poll"
 
 var Root = ({ children }) =>
   <div className={ css.Counter }>{ children }</div>
 
 export class Counters extends Component {
   componentWillMount () {
-    pollCounters()
+    this.poll = pollCounters()
+  }
+
+  componentWillUnmount () {
+    this.poll.destroy()
   }
 
   render () {

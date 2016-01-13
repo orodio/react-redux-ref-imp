@@ -31,6 +31,7 @@
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
     "react-redux": "^4.0.6",
+    "rx": "^4.0.7",
     "style-loader": "^0.13.0",
     "superagent": "^1.6.1",
     "webpack": "^1.12.9"
